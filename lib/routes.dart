@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spotify_africa_assessment/features/about/presentation/pages/about.dart';
 import 'package:flutter_spotify_africa_assessment/features/landing/presentation/pages/landing.dart';
-import 'package:flutter_spotify_africa_assessment/features/spotify/presentation/pages/spotify_category.dart';
+import 'package:flutter_spotify_africa_assessment/features/spotify/presentation/spotify_category_page.dart';
 
 class AppRoutes {
   /// App start up (loading) page
