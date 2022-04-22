@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math';
 
 import 'package:flutter_spotify_africa_assessment/features/spotify/application_layer/category_header/category_header_bloc.dart';
+import 'package:flutter_spotify_africa_assessment/features/spotify/application_layer/category_playlist/category_playlist_bloc.dart';
+
+import '../components/playlist_card.dart';
 
 class SpotifyCategory extends StatefulWidget {
   const SpotifyCategory({Key? key, required this.categoryId}) : super(key: key);
@@ -27,6 +30,9 @@ class _SpotifyCategoryState extends State<SpotifyCategory>
     context
         .read<CategoryHeaderBloc>()
         .add(GetCategoryHeaderEvent(categoryId: widget.categoryId));
+    context
+        .read<CategoryPlaylistBloc>()
+        .add(GetCategoryPlaylistEvent(categoryId: widget.categoryId));
   }
 
   @override
@@ -92,21 +98,44 @@ class _SpotifyCategoryState extends State<SpotifyCategory>
             ),
           ),
           // Next, create a SliverList
-          SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Card(
-                  color: Colors.green[100 * (index % 9 + 1)],
-                  child: ListTile(
-                    title: Text("shohel$index"),
-                  ),
-                );
-              },
-              childCount: 100,
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
-          )
+          BlocBuilder<CategoryPlaylistBloc, CategoryPlaylistState>(
+              builder: (context, state) {
+            if (state is CategoryPlaylistView) {
+              return SliverGrid(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return PlaylistCard(
+                      playlist: state.data[index],
+                      color: Color.fromARGB(
+                          255, 56 * (index % 9 + 1), 100 * (index % 9 + 1), 0),
+                    );
+                  },
+                  childCount: state.data.length,
+                ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+              );
+            } else if (state is CategoryPlaylistError) {
+              return SliverToBoxAdapter(
+                  child: SizedBox(
+                      height: headerHeight,
+                      child: Center(
+                          child: Text(
+                        state.messgae,
+                        textAlign: TextAlign.center,
+                      ))));
+            }
+
+            return SliverToBoxAdapter(
+                child: SizedBox(
+              height: headerHeight,
+              child: const Center(
+                  child: CircularProgressIndicator(
+                color: Colors.white,
+              )),
+            ));
+          }),
+          const SliverPadding(padding: EdgeInsets.symmetric(vertical: 10)),
         ],
       ),
     );
