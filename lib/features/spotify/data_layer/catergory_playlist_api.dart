@@ -5,7 +5,7 @@ import 'dart:convert';
 import '../domain_layer/catergory_playlist_model.dart';
 
 class CatergoryPlaylistsAPI {
-  Future<List<CategoryPlaylist>> getPlaylists(String categoryId) async {
+  Future<List<CategoryPlaylist>> getCategoryPlaylists(String categoryId) async {
     final request = await http
         .get(Uri.parse('${serverUrl}browse/categories/$categoryId/playlists'),
             headers: headers)

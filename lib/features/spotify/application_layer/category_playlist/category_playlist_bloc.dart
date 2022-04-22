@@ -16,7 +16,7 @@ class CategoryPlaylistBloc
   Future<void> _oneGetPlaylistCategoriesHeader(GetCategoryPlaylistEvent event,
       Emitter<CategoryPlaylistState> emit) async {
     try {
-      var data = await repo.getPlaylists(event.categoryId);
+      var data = await repo.getCategoryPlaylists(event.categoryId);
       emit(CategoryPlaylistView(data: data));
     } catch (e) {
       emit(CategoryPlaylistError(messgae: e.toString()));
