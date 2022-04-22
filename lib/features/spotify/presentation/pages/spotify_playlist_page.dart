@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spotify_africa_assessment/features/spotify/domain_layer/catergory_playlist_model.dart';
+import 'package:flutter_spotify_africa_assessment/features/spotify/presentation/components/artist_card.dart';
+import 'package:flutter_spotify_africa_assessment/features/spotify/presentation/components/song_card.dart';
 
 class SpotifyPlaylist extends StatefulWidget {
   const SpotifyPlaylist({Key? key, required this.playlist}) : super(key: key);
@@ -26,12 +28,12 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
                 width: double.infinity,
                 height: 40,
                 color: Colors.white,
-                child: Center(
+                child: const Center(
                   child: TextField(
                     decoration: InputDecoration(
-                        hintText: 'Search for something',
-                        prefixIcon: Icon(Icons.search),
-                        suffixIcon: Icon(Icons.camera_alt)),
+                      hintText: 'Search for something',
+                      prefixIcon: Icon(Icons.search),
+                    ),
                   ),
                 ),
               ),
@@ -59,7 +61,7 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
                   )),
               Container(
                 height: 35,
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: RichText(
                     text: TextSpan(
                   text: '149, 156 likes ',
@@ -79,27 +81,32 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
                 )),
               ),
               Container(
-                  height: 350,
+                  height: 300,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  color: Color.fromARGB(15, 190, 10, 3),
-                  child: Center(
-                    child: Text(widget.playlist.description.split(":")[0],
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                            fontWeight: FontWeight.normal, fontSize: 16)),
-                  )),
+                  child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return SongCard(
+                          imageURL: widget.playlist.pictureURL,
+                          name: widget.playlist.name,
+                        );
+                      })),
               Container(
                   height: 250,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  color: Color.fromARGB(150, 190, 10, 3),
-                  child: Center(
-                    child: Text(widget.playlist.description.split(":")[0],
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                            fontWeight: FontWeight.normal, fontSize: 16)),
-                  )),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return ArtistCard(
+                          imageURL: widget.playlist.pictureURL,
+                          name: widget.playlist.name,
+                        );
+                      })),
             ]),
           ),
         ],
