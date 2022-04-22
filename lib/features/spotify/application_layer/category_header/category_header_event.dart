@@ -6,3 +6,5 @@ abstract class CategoryHeaderEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetCategoryHeaderEvent extends CategoryHeaderEvent {}
