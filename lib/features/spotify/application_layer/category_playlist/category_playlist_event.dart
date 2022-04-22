@@ -6,3 +6,9 @@ abstract class CategoryPlaylistEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetCategoryPlaylistEvent extends CategoryPlaylistEvent {
+  final String categoryId;
+
+  const GetCategoryPlaylistEvent({required this.categoryId});
+}
