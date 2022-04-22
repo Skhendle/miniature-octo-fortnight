@@ -9,6 +9,13 @@ abstract class CategoryHeaderState extends Equatable {
 
 class CategoryHeaderInitial extends CategoryHeaderState {}
 
-class CategoryHeaderView extends CategoryHeaderState {}
+class CategoryHeaderView extends CategoryHeaderState {
+  final CategoryHeader data;
+  const CategoryHeaderView({required this.data}) : super();
+}
 
-class CategoryHeaderError extends CategoryHeaderState {}
+class CategoryHeaderError extends CategoryHeaderState {
+  final String messgae;
+  const CategoryHeaderError({required this.messgae}) : super();
+
+}
