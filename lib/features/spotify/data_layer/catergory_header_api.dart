@@ -5,7 +5,7 @@ import 'dart:convert';
 import '../domain_layer/catergory_header_model.dart';
 
 class CatergoryHeaderAPI {
-  Future<CategoryHeader> getPlaylists(String categoryId) async {
+  Future<CategoryHeader> getPlaylistHeader(String categoryId) async {
     final request = await http
         .get(Uri.parse('${serverUrl}browse/categories/$categoryId/playlists'),
             headers: headers)
