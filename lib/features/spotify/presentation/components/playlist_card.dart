@@ -21,21 +21,21 @@ class PlaylistCard extends StatelessWidget {
                   height: double.infinity,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(playlist.pictureURL),
-                          fit: BoxFit.cover)))),
+                          image: NetworkImage(playlist.pictureURL!),
+                          fit: BoxFit.fill)))),
           Expanded(
               child: Center(
-                  child: Text(playlist.name,
+                  child: Text(playlist.name!,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline5?.copyWith(
                             fontWeight: FontWeight.bold,
                           )))),
           Expanded(
-              child: Text('FOLLOWERS',
+              child: Text('${playlist.followers} FOLLOWERS',
                   style: Theme.of(context)
                       .textTheme
                       .headline6
-                      ?.copyWith(fontWeight: FontWeight.normal, fontSize: 14)))
+                      ?.copyWith(fontWeight: FontWeight.normal, fontSize: 11)))
         ],
       ),
     );

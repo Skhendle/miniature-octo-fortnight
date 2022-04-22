@@ -1,12 +1,15 @@
 class CategoryPlaylist {
-  final String name;
-  final String description;
-  final String pictureURL;
-  final String playListID;
+  String? name;
+  String? description;
+  String? pictureURL;
+  String? playListID;
+  String? followers;
 
-  CategoryPlaylist(
-      {required this.name,
-      required this.description,
-      required this.pictureURL,
-      required this.playListID});
+  CategoryPlaylist({
+    this.name,
+    this.description,
+    this.pictureURL,
+    this.playListID,
+    this.followers,
+  });
 }

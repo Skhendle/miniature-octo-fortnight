@@ -48,14 +48,14 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
                 height: 200,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(widget.playlist.pictureURL),
+                        image: NetworkImage(widget.playlist.pictureURL!),
                         fit: BoxFit.fill)),
               ),
               Container(
                   height: 50,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Center(
-                    child: Text(widget.playlist.description.split(":")[0],
+                    child: Text(widget.playlist.description!,
                         style: Theme.of(context).textTheme.headline6?.copyWith(
                             fontWeight: FontWeight.normal, fontSize: 16)),
                   )),
@@ -64,7 +64,7 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: RichText(
                     text: TextSpan(
-                  text: '149, 156 likes ',
+                  text: '${widget.playlist.followers!} likes ',
                   style: Theme.of(context)
                       .textTheme
                       .headline6
@@ -89,8 +89,8 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
                       itemCount: 10,
                       itemBuilder: (context, index) {
                         return SongCard(
-                          imageURL: widget.playlist.pictureURL,
-                          name: widget.playlist.name,
+                          imageURL: widget.playlist.pictureURL!,
+                          name: widget.playlist.name!,
                         );
                       })),
               Container(
@@ -103,8 +103,8 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
                       itemCount: 10,
                       itemBuilder: (context, index) {
                         return ArtistCard(
-                          imageURL: widget.playlist.pictureURL,
-                          name: widget.playlist.name,
+                          imageURL: widget.playlist.pictureURL!,
+                          name: widget.playlist.name!,
                         );
                       })),
             ]),
