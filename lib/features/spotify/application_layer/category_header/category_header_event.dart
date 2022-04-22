@@ -7,4 +7,8 @@ abstract class CategoryHeaderEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetCategoryHeaderEvent extends CategoryHeaderEvent {}
+class GetCategoryHeaderEvent extends CategoryHeaderEvent {
+  final String categoryId;
+
+  const GetCategoryHeaderEvent({required this.categoryId});
+}

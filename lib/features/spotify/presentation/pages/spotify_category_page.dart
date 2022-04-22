@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spotify_africa_assessment/colors.dart';
-import 'package:flutter_spotify_africa_assessment/features/about/presentation/components/animated_gradient_container.dart';
 import 'dart:math';
 
 import 'package:flutter_spotify_africa_assessment/features/spotify/application_layer/category_header/category_header_bloc.dart';
@@ -26,7 +24,9 @@ class _SpotifyCategoryState extends State<SpotifyCategory>
         AnimationController(duration: const Duration(seconds: 60), vsync: this);
     animation = Tween<double>(begin: 0, end: 2 * pi).animate(controller);
     controller.repeat();
-    context.read<CategoryHeaderBloc>().add(GetCategoryHeaderEvent());
+    context
+        .read<CategoryHeaderBloc>()
+        .add(GetCategoryHeaderEvent(categoryId: widget.categoryId));
   }
 
   @override
@@ -104,8 +104,8 @@ class _SpotifyCategoryState extends State<SpotifyCategory>
               },
               childCount: 100,
             ),
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
           )
         ],
       ),

@@ -16,7 +16,7 @@ class CategoryHeaderBloc
   Future<void> _oneGetCategoriesHeader(
       GetCategoryHeaderEvent event, Emitter<CategoryHeaderState> emit) async {
     try {
-      var data = await repo.getPlaylistHeader("afro");
+      var data = await repo.getPlaylistHeader(event.categoryId);
       emit(CategoryHeaderView(data: data));
     } catch (e) {
       emit(CategoryHeaderError(messgae: e.toString()));
