@@ -6,6 +6,7 @@ import 'package:flutter_spotify_africa_assessment/features/spotify/application_l
 import 'package:flutter_spotify_africa_assessment/features/spotify/application_layer/category_playlist/category_playlist_bloc.dart';
 
 import '../components/playlist_card.dart';
+import 'spotify_playlist_page.dart';
 
 class SpotifyCategory extends StatefulWidget {
   const SpotifyCategory({Key? key, required this.categoryId}) : super(key: key);
@@ -104,10 +105,21 @@ class _SpotifyCategoryState extends State<SpotifyCategory>
               return SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                    return PlaylistCard(
-                      playlist: state.data[index],
-                      color: Color.fromARGB(
-                          255, 56 * (index % 9 + 1), 100 * (index % 9 + 1), 0),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SpotifyPlaylist(
+                                    playlist: state.data[index],
+                                  )),
+                        );
+                      },
+                      child: PlaylistCard(
+                        playlist: state.data[index],
+                        color: Color.fromARGB(255, 56 * (index % 9 + 1),
+                            100 * (index % 9 + 1), 0),
+                      ),
                     );
                   },
                   childCount: state.data.length,
