@@ -7,11 +7,11 @@ import '../domain_layer/catergory_header_model.dart';
 class CatergoryHeaderAPI {
   Future<CategoryHeader> getPlaylistHeader(String categoryId) async {
     final request = await http
-        .get(Uri.parse('${serverUrl}browse/categories/$categoryId/playlists'),
+        .get(Uri.parse('${serverUrl}browse/categories/$categoryId'),
             headers: headers)
         .timeout(const Duration(seconds: 30))
         .catchError((e) {
-      throw (['Network Connection Problem']);
+      throw ('Network Connection Problem');
     });
 
     if (request.statusCode == 200) {

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spotify_africa_assessment/features/about/presentation/pages/about.dart';
 import 'package:flutter_spotify_africa_assessment/features/landing/presentation/pages/landing.dart';
 import 'package:flutter_spotify_africa_assessment/features/spotify/presentation/pages/spotify_category_page.dart';
+
+import 'features/spotify/application_layer/category_header/category_header_bloc.dart';
 
 class AppRoutes {
   /// App start up (loading) page
@@ -28,8 +31,11 @@ class AppRoutes {
       case spotifyCategory:
         final String categoryId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (BuildContext context) => SpotifyCategory(
-            categoryId: categoryId,
+          builder: (BuildContext context) => BlocProvider(
+            create: (context) => CategoryHeaderBloc(),
+            child: SpotifyCategory(
+              categoryId: categoryId,
+            ),
           ),
           settings: settings,
         );
