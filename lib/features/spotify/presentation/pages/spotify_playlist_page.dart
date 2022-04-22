@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spotify_africa_assessment/features/spotify/domain_layer/catergory_playlist_model.dart';
 
 class SpotifyPlaylist extends StatefulWidget {
-  SpotifyPlaylist({Key? key}) : super(key: key);
+  const SpotifyPlaylist({Key? key, required this.playlist}) : super(key: key);
+  final CategoryPlaylist playlist;
 
   @override
   State<SpotifyPlaylist> createState() => _SpotifyPlaylistState();
@@ -18,14 +20,8 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
             pinned: true,
             snap: false,
             centerTitle: false,
-            title: Text('Kindacode.com'),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.shopping_cart),
-                onPressed: () {},
-              ),
-            ],
             bottom: AppBar(
+              automaticallyImplyLeading: false,
               title: Container(
                 width: double.infinity,
                 height: 40,
@@ -45,17 +41,65 @@ class _SpotifyPlaylistState extends State<SpotifyPlaylist> {
           SliverList(
             delegate: SliverChildListDelegate([
               Container(
-                height: 400,
-                child: Center(
-                  child: Text(
-                    'This is an awesome shopping platform',
-                  ),
-                ),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                height: 200,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(widget.playlist.pictureURL),
+                        fit: BoxFit.fill)),
               ),
               Container(
-                height: 1000,
-                color: Colors.pink,
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Center(
+                    child: Text(widget.playlist.description.split(":")[0],
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                            fontWeight: FontWeight.normal, fontSize: 16)),
+                  )),
+              Container(
+                height: 35,
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: RichText(
+                    text: TextSpan(
+                  text: '149, 156 likes ',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '- Time',
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                          fontWeight: FontWeight.normal,
+                          color: Colors.green,
+                          fontSize: 16),
+                    ),
+                  ],
+                )),
               ),
+              Container(
+                  height: 350,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  color: Color.fromARGB(15, 190, 10, 3),
+                  child: Center(
+                    child: Text(widget.playlist.description.split(":")[0],
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                            fontWeight: FontWeight.normal, fontSize: 16)),
+                  )),
+              Container(
+                  height: 250,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  color: Color.fromARGB(150, 190, 10, 3),
+                  child: Center(
+                    child: Text(widget.playlist.description.split(":")[0],
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                            fontWeight: FontWeight.normal, fontSize: 16)),
+                  )),
             ]),
           ),
         ],
